@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .lang-btn {
+            background-color: #ddd;
+            border: none;
+            padding: 15px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background-color: #ccc;
+        }
+
+        #textBox {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.6;
+            white-space: pre-wrap; /* Fa andare a capo bene */
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Aggiunta: rendi il box scrollabile */
+        .scroll-box {
+            max-height: 300px; /* Altezza visibile */
+            overflow-y: auto;  /* Scroll verticale */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Seleziona la lingua</h2>
+
+        <!-- INIZIO LISTA SCORREVOLE -->
+        <div class="scroll-box">
+            <button class="lang-btn" onclick="playLanguage('italiano')">Italiano</button>
+            <button class="lang-btn" onclick="playLanguage('albanese')">Albanese</button>
+            <button class="lang-btn" onclick="playLanguage('arabo')">Arabo</button>
+            <button class="lang-btn" onclick="playLanguage('bengalese')">Bengalese</button>
+            <button class="lang-btn" onclick="playLanguage('bulgaro')">Bulgaro</button>
+            <button class="lang-btn" onclick="playLanguage('ceco')">Ceco</button>
+            <button class="lang-btn" onclick="playLanguage('cinese')">Cinese</button>
+            <button class="lang-btn" onclick="playLanguage('croato')">Croato</button>
+            <button class="lang-btn" onclick="playLanguage('danese')">Danese</button>
+            <button class="lang-btn" onclick="playLanguage('estone')">Estone</button>
+            <button class="lang-btn" onclick="playLanguage('finlandese')">Finlandese</button>
+            <button class="lang-btn" onclick="playLanguage('francese')">Francese</button>
+            <button class="lang-btn" onclick="playLanguage('giapponese')">Giapponese</button>
+            <button class="lang-btn" onclick="playLanguage('greco')">Greco</button>
+            <button class="lang-btn" onclick="playLanguage('hindi')">Hindi</button>
+            <button class="lang-btn" onclick="playLanguage('inglese')">Inglese</button>
+            <button class="lang-btn" onclick="playLanguage('norvegese')">Norvegese</button>
+            <button class="lang-btn" onclick="playLanguage('olandese')">Olandese</button>
+             <button class="lang-btn" onclick="playLanguage('persiano')">Persiano</button>
+            <button class="lang-btn" onclick="playLanguage('polacco')">Polacco</button>
+            <button class="lang-btn" onclick="playLanguage('portoghese')">Portoghese</button>
+            <button class="lang-btn" onclick="playLanguage('rumeno')">Rumeno</button>
+            <button class="lang-btn" onclick="playLanguage('russo')">Russo</button>
+            <button class="lang-btn" onclick="playLanguage('spagnolo')">Spagnolo</button>
+            <button class="lang-btn" onclick="playLanguage('svedese')">Svedese</button>
+            <button class="lang-btn" onclick="playLanguage('tagalog')">Tagalog</button>
+            <button class="lang-btn" onclick="playLanguage('tedesco')">Tedesco</button>
+            <button class="lang-btn" onclick="playLanguage('turco')">Turco</button>
+            <button class="lang-btn" onclick="playLanguage('ungherese')">Ungherese</button>
+           
+            
+            
+        </div>
+        <!-- FINE LISTA SCORREVOLE -->
+
+        <div id="textBox"></div>
+
+        <audio id="audioPlayer" controls style="display: none;"></audio>
+    </div>
+
+    <script> 
+        const texts = {
+            italiano: `Buongiorno. Posso farti una domanda? Conosci il sito web più tradotto al mondo? 
+E il sito JW.ORG gratuito e tradotto in più di 1000 lingue. 
+Contiene argomenti e video utili per tutte le persone. 
+Se lo desideri puoi prendere il biglietto. 
+Grazie per la tua attenzione. Buona giornata.`,
+
+            albanese: `Mirëmëngjes. A mund të të bëj një pyetje? A e dini se cila është faqja e internetit më e përkthyer në botë?
+Dhe faqja e internetit falas JW.ORG është përkthyer në më shumë se 1000 gjuhë.
+Përmban tema dhe video të dobishme për të gjithë njerëzit.
+Nëse dëshironi, mund të merrni biletën.
+Faleminderit për vëmendjen tuaj. Ditë të mbarë.`,
+
+            arabo: `صباح الخير. هل يمكنني أن أسألك سؤالا؟ هل تعرف الموقع الأكثر ترجمة في العالم؟
+وموقع JW.ORG المجاني مترجم إلى أكثر من 1000 لغة.
+يحتوي على مواضيع وفيديوهات مفيدة لجميع الأشخاص.
+إذا كنت ترغب في ذلك، يمكنك أخذ التذكرة.
+شكرًا لكم على اهتمامكم. يوم جيد.`,
+
+            bengalese: `সুপ্রভাত। আমি কি তোমাকে একটা প্রশ্ন করতে পারি? আপনি কি বিশ্বের সবচেয়ে বেশি অনুবাদিত ওয়েবসাইট জানেন?
+আর বিনামূল্যের JW.ORG ওয়েবসাইটটি ১০০০ টিরও বেশি ভাষায় অনুবাদ করা হয়েছে।
+সকল মানুষের জন্য দরকারী বিষয় এবং ভিডিও রয়েছে।
+তুমি চাইলে টিকিট নিতে পারো।
+আপনার মনোযোগের জন্য ধন্যবাদ। শুভ দিন.`,
+
+            bulgaro: `Добро утро. Мога ли да ви задам един въпрос? Знаете ли кой е най-превежданият уебсайт в света?
+А безплатният уебсайт JW.ORG е преведен на повече от 1000 езика.
+Съдържа полезни теми и видеоклипове за всички хора.
+Ако желаете, можете да вземете билета.
+Благодаря ви за вниманието. Добър ден.`,
+
+            ceco: `Dobré ráno. Můžu se vás na něco zeptat? Znáte nejpřekládanější webovou stránku na světě?
+A bezplatné webové stránky JW.ORG jsou přeloženy do více než 1000 jazyků.
+Obsahuje užitečná témata a videa pro všechny.
+Pokud chcete, můžete si vzít lístek.
+Děkuji za vaši pozornost. Dobrý den.`,
+
+            cinese: `早安.我可以問你一個問題嗎？你知道世界上翻譯次數最多的網站嗎？
+免費的 JW.ORG 網站已翻譯成 1000 多種語言。
+包含對所有人都有用的主題和影片。
+如果你願意的話，你可以拿這張票。
+感謝您的關注。再會.`,
+
+            croato: `Dobro jutro. Mogu li vam postaviti pitanje? Znate li koja je najprevođenija web stranica na svijetu?
+A besplatna web stranica JW.ORG prevedena je na više od 1000 jezika.
+Sadrži korisne teme i videozapise za sve ljude.
+Ako želite, možete uzeti kartu.
+Hvala vam na pažnji. Dobar dan.`,
+
+            danese: `Godmorgen. Må jeg stille dig et spørgsmål? Kender du den mest oversatte hjemmeside i verden?
+Og den gratis hjemmeside JW.ORG er oversat til mere end 1000 sprog.
+Indeholder nyttige emner og videoer for alle.
+Hvis du ønsker det, kan du tage billetten.
+Tak for din opmærksomhed. God dag.`,
+
+            finlandese: `Hyvää huomenta. Voinko kysyä sinulta kysymyksen? Tiedätkö maailman käännetyimmän verkkosivuston?
+Ja ilmainen JW.ORG-verkkosivusto on käännetty yli 1000 kielelle.
+Sisältää hyödyllisiä aiheita ja videoita kaikille ihmisille.
+Jos haluat, voit ottaa lipun.
+Kiitos huomiostasi. Hyvää päivää.`,
+
+            francese: `Bonjour. Puis-je te poser une question ? Connaissez-vous le site Web le plus traduit au monde ?
+Et le site Web gratuit JW.ORG est traduit dans plus de 1000 langues.
+Contient des sujets et des vidéos utiles pour tous.
+Si vous le souhaitez, vous pouvez prendre le ticket.
+Merci pour votre attention. Bonne journée.`,
+            
+            
+            giapponese: `おはよう。質問してもよろしいでしょうか？世界で最も翻訳されているウェブサイトをご存知ですか?
+無料のJW.ORGウェブサイトは1000以上の言語に翻訳されています。
+すべての人にとって役立つトピックとビデオが含まれています。
+ご希望の場合はチケットをお受け取りいただけます。
+ご清聴ありがとうございました。良い一日。`,
+            
+            greco: `Καλημέρα. Μπορώ να σας κάνω μια ερώτηση; Γνωρίζετε την πιο μεταφρασμένη ιστοσελίδα στον κόσμο;
+Και ο δωρεάν ιστότοπος JW.ORG είναι μεταφρασμένος σε περισσότερες από 1000 γλώσσες.
+Περιέχει χρήσιμα θέματα και βίντεο για όλους.
+Αν θέλετε, μπορείτε να πάρετε το εισιτήριο.
+Σας ευχαριστώ για την προσοχή σας. Καλημέρα.`,
+            
+            
+            hindi: `शुभ प्रभात। क्या मुझे आपसे एक सवाल पूछने की अनुमति है? क्या आप जानते हैं कि दुनिया में सबसे अधिक अनुवादित वेबसाइट कौन सी है?
+और निःशुल्क JW.ORG वेबसाइट का 1000 से अधिक भाषाओं में अनुवाद किया गया है।
+इसमें सभी लोगों के लिए उपयोगी विषय और वीडियो शामिल हैं।
+अगर आप चाहें तो टिकट ले सकते हैं।
+आपके ध्यान देने के लिए धन्यवाद! शुभ दिन।`,
+            
+            inglese: `Good morning. Can I ask you a question? Do you know the most translated website in the world?
+And the free JW.ORG website translated into more than 1000 languages.
+It contains useful topics and videos for all people.
+If you wish, you can take the ticket.
+Thank you for your attention. Have a nice day.`,
+            
+            norvegese: `God morgen. Kan jeg stille deg et spørsmål? Kjenner du til den mest oversatte nettsiden i verden?
+Og den gratis nettsiden JW.ORG er oversatt til mer enn 1000 språk.
+Inneholder nyttige emner og videoer for alle.
+Hvis du ønsker det, kan du ta billetten.
+Takk for oppmerksomheten. God dag.`,
+            
+            olandese: `Goedemorgen. Mag ik u een vraag stellen? Weet jij welke website het meest vertaald is ter wereld?
+En de gratis website JW.ORG is in meer dan 1000 talen vertaald.
+Bevat nuttige onderwerpen en video's voor iedereen.
+Als u wilt, kunt u het ticket meenemen.
+Dank u voor uw aandacht. Goededag.`,
+            
+            polacco: `Dzień dobry. Czy mogę zadać Ci pytanie? Czy znasz najczęściej tłumaczoną stronę internetową na świecie?
+Bezpłatna strona internetowa JW.ORG została przetłumaczona na ponad 1000 języków.
+Zawiera przydatne tematy i filmy dla każdego.
+Jeśli chcesz, możesz wziąć bilet.
+Dziękuję za uwagę. Dzień dobry.`,
+            
+            
+            portoghese: `Bom dia. Posso fazer-te uma pergunta? Conhece o site mais traduzido do mundo?
+E o site gratuito JW.ORG está traduzido em mais de 1000 línguas.
+Contém tópicos e vídeos úteis para todas as pessoas.
+Se desejar, pode levantar o bilhete.
+Obrigado pela sua atenção. Bom dia.`,
+            
+            
+          rumeno: `Bună dimineaţa. Pot să vă pun o întrebare? Știi care este cel mai tradus site web din lume?
+Iar site-ul gratuit JW.ORG este tradus în peste 1000 de limbi.
+Conține subiecte și videoclipuri utile pentru toți.
+Dacă doriți, puteți lua biletul.
+Vă mulțumim pentru atenție. Bună ziua.`,
+            
+            russo: `Доброе утро. Могу ли я задать вам вопрос? Знаете ли вы самый переводимый сайт в мире?
+А бесплатный сайт JW.ORG переведен более чем на 1000 языков.
+Содержит полезные темы и видео для всех людей.
+Если хотите, можете взять билет.
+Спасибо за внимание. Добрый день.`,
+            
+            spagnolo: `Buen día. ¿Puedo hacerte una pregunta? ¿Conoces cuál es el sitio web más traducido del mundo?
+Y el sitio web gratuito JW.ORG está traducido a más de 1000 idiomas.
+Contiene temas y vídeos útiles para todas las personas.
+Si lo deseas puedes coger el billete.
+Gracias por su atención. Buen día.`,
+            
+            svedese: `God morgon. Får jag ställa en fråga? Känner du till världens mest översatta webbplats?
+Och den kostnadsfria webbplatsen JW.ORG är översatt till fler än 1000 språk.
+Innehåller användbara ämnen och videor för alla.
+Om du vill kan du ta biljetten.
+Tack för din uppmärksamhet. God dag.`,
+            
+            tagalog: `Magandang araw. Maaari ba kitang tanungin? Kilala mo ba ang pinakamalawak na isinaling website
+sa buong mundo? Ito ay ang JW.ORG, libre at isinalin sa mahigit 1000 wika. Naglalaman ito ng mga 
+paksa at video na kapaki-pakinabang para sa lahat ng tao. Kung nais mo, maaari kang kumuha ng tiket. 
+Salamat sa iyong atensyon. Magandang araw!`,
+            
+            tedesco: `Guten Morgen. Kann ich Ihnen eine Frage stellen? Kennen Sie die am häufigsten übersetzte Website der Welt?
+Und die kostenlose Website JW.ORG wird in mehr als 1000 Sprachen übersetzt.
+Enthält nützliche Themen und Videos für alle Menschen.
+Wenn Sie möchten, können Sie das Ticket nehmen.
+Vielen Dank für Ihre Aufmerksamkeit. Guten Tag.`,
+            
+            turco: `Günaydın. Size bir soru sorabilir miyim? Dünyanın en çok tercüme edilen web sitesini biliyor musunuz?
+Ve ücretsiz JW.ORG web sitesi 1000'den fazla dile çevrilmiştir.
+Her kesime hitap eden faydalı konu ve videolar içeriyor.
+Dilerseniz biletinizi alabilirsiniz.
+İlginiz için teşekkür ederiz. İyi günler.`,
+            
+            ungherese: `Jó reggelt. Feltehetek egy kérdést? Tudod, melyik a világ legtöbb nyelvre lefordított weboldala?
+Az ingyenes JW.ORG weboldal több mint 1000 nyelvre van lefordítva.
+Hasznos témákat és videókat tartalmaz mindenki számára.
+Ha szeretnéd, elviheted a jegyet.
+Köszönöm a figyelmet. Jó napot kívánok.`,
+            
+            persiano: `صبح بخیر. میشه یه سوال ازت بپرسم؟ آیا می‌دانید کدام وب‌سایت در جهان بیشترین تعداد ترجمه را دارد؟
+و وب‌سایت رایگان JW.ORG به بیش از ۱۰۰۰ زبان ترجمه شده است.
+شامل مباحث و ویدیوهای مفید برای همه افراد است.
+در صورت تمایل می‌توانید بلیط را تهیه کنید.
+از توجه شما متشکرم. روز بخیر.`,
+            
+            estone: `Tere hommikust. Kas ma võin sulle küsimuse esitada? Kas sa tead maailma enim tõlgitud veebisaiti?
+Ja tasuta veebisait JW.ORG on tõlgitud enam kui 1000 keelde.
+Sisaldab kasulikke teemasid ja videoid kõigile inimestele.
+Soovi korral võid pileti kaasa võtta.
+Tänan tähelepanu eest. Head päeva.`
+            
+            
+            
+        };
+
+        function playLanguage(lang) {
+            document.getElementById('textBox').innerText = texts[lang];
+            let audio = document.getElementById('audioPlayer');
+            audio.src = lang + '.mp3';
+            audio.style.display = 'block';
+            audio.play();
+        }
+    </script>
+
+</body>
+</html>
